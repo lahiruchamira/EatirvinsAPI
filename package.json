@@ -1,0 +1,27 @@
+{
+  "name": "node-app",
+  "version": "1.0.0",
+  "description": "Node App",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha --recursive --exit --timeout 100000"
+  },
+  "keywords": [
+    "Express",
+    "RestAPI",
+    "MongoDB",
+    "Mongoose",
+    "Notes"
+  ],
+  "author": "callicoder",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "chai": "^4.3.4",
+    "express": "^4.16.3",
+    "mocha": "^8.4.0",
+    "mockgoose": "^8.0.4",
+    "mongoose": "^5.12.13",
+    "supertest": "^6.1.3"
+  }
+}
