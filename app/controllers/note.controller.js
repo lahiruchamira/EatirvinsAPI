@@ -34,7 +34,7 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve and return all Products from the database.
+// Retrieve and return all Product from the database.
 exports.findAll = (req, res) => {
     Note.find()
     .then(notes => {

@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const expressGraphQL = require('express-graphql').graphqlHTTP;
+const schema = require('./schema');
 
 // create express app
 const app = express();
@@ -10,6 +12,11 @@ app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
   next();
 });
+
+app.use('/graphql', expressGraphQL({
+    graphiql: true,
+    schema: schema
+  }))
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }))
