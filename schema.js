@@ -67,53 +67,53 @@ const {
             tags: {type: new GraphQLList(GraphQLString)}
         },
         resolve(parentValue, args) {
-          const product = {
-            name: args.name,
-            price: args.price,
-            description: args.description,
-            image: args.image
-          }
-          const note = new Note({
+          const product = new Note({
             name: args.name,
             price: args.price,
             description: args.description,
             image:args.description,
-            tags:tags
+            tags:args.tags
         });
-          Note.create(note);
+         return Note.create(product);
+         
+       
         }
-      }/* ,
-      editBook: {
-        type: BookType,
+      } ,
+      editProduct: {
+        type: ProductType,
         args: {
-          id: { type: new GraphQLNonNull(GraphQLInt) },
-          title: { type: GraphQLString },
-          available: { type: GraphQLBoolean }
+          id: { type: new GraphQLNonNull(GraphQLString) },
+          name: { type: GraphQLString },
+            price: { type: GraphQLInt },
+            description: {type: GraphQLString},
+            image: {type: GraphQLString},
+            tags: {type: new GraphQLList(GraphQLString)}
         },
         resolve(parentValue, args) {
-          const index = books.findIndex((b) => b.id === args.id);
-  
-          if (index > -1) {
-            if (args.title) books[index].title = args.title;
-            if (args.hasOwnProperty('available'))
-              books[index].available = args.available;
-            return books[index];
-          }
+          const updateProduct = Note.findById(args.id);
+          const product = new Note({
+            name: args.name,
+            price: args.price,
+            description: args.description,
+            image:args.description,
+            tags:args.tags
+        })
+          return Note.findByIdAndUpdate(args.id, { name: args.name , 
+            price: args.price,
+            description:args.description,
+            image: args.description,
+            tags:args.tags},{new: true});
         }
       },
-      deleteBook: {
-        type: BookType,
+      deleteProduct: {
+        type: ProductType,
         args: {
-          id: { type: new GraphQLNonNull(GraphQLInt) },
+          id:  {type : GraphQLString}
         },
         resolve(parentValue, args) {
-          const index = books.findIndex((b) => b.id === args.id);
-          if (index > -1) {
-            const el = books.splice(index, 1)[0];
-            return el;
-          }
+          return Note.findByIdAndRemove(args.id);
         }
-      } */
+      }
     }
   });
   module.exports = new GraphQLSchema({
